@@ -1,8 +1,7 @@
 #!/bin/bash
 
-# Example
-# echo "What is your problem man" | ./examples/fix-paragraph.sh
-# What is the issue you are facing, friend?
+# Usage
+# echo "What is your problem man" | ./examples/fix-sentence.sh
 
 MESSAGE=$(cat /dev/stdin)
 
@@ -12,4 +11,4 @@ Please rewrite the following sentence so it sounds smart.
 $MESSAGE
 EOM
 
-echo "$PROMPT" | go run ./cmd/ezgpt3/main.go
+echo "$PROMPT" | ezgpt3

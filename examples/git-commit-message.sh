@@ -17,4 +17,4 @@ Changes:
 $CHANGES
 EOM
 
-echo "$PROMPT"  | go run ./cmd/ezgpt3/main.go -tokens 70
+echo "$PROMPT"  | ezgpt3 -tokens 70
