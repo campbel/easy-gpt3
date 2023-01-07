@@ -17,4 +17,4 @@ Changes:
 $CHANGES
 EOM
 
-echo "$PROMPT"  | ezgpt3 -tokens 70
+echo "$PROMPT" | ezgpt3 -tokens 70
