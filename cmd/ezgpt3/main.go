@@ -7,7 +7,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/cambel/ez-gpt3/openai"
+	"github.com/campbel/ez-gpt3/openai"
 )
 
 func main() {
