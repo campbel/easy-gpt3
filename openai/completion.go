@@ -16,7 +16,7 @@ type CompletionRequest struct {
 	Model       string  `json:"model"`
 	Prompt      string  `json:"prompt"`
 	MaxTokens   int     `json:"max_tokens"`
-	Temperature float32 `json:"temperature"`
+	Temperature float64 `json:"temperature"`
 }
 
 type CompletionResponse struct {
@@ -28,18 +28,20 @@ type CompletionResponse struct {
 type CompletionOptions struct {
 	Model       string
 	MaxTokens   int
-	Temperature float32
+	Temperature float64
 }
 
 var DefaultCompletionOptions = CompletionOptions{
 	Model:       "text-davinci-003",
-	MaxTokens:   1000,
+	MaxTokens:   100,
 	Temperature: 0.6,
 }
 
 func (c *Client) GetCompletion(prompt string, options ...CompletionOptions) (string, error) {
 	options = append([]CompletionOptions{DefaultCompletionOptions}, options...)
-	var completion CompletionRequest
+	completion := CompletionRequest{
+		Prompt: prompt,
+	}
 	for _, option := range options {
 		completion.Model = or(option.Model, completion.Model)
 		completion.MaxTokens = or(option.MaxTokens, completion.MaxTokens)

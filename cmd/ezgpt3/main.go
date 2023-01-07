@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"io"
 	"net/http"
 	"os"
@@ -9,6 +10,12 @@ import (
 )
 
 func main() {
+
+	modelFlag := flag.String("model", openai.DefaultCompletionOptions.Model, "The model to use")
+	tokenFlag := flag.Int("tokens", openai.DefaultCompletionOptions.MaxTokens, "The max number of tokens to generate")
+	tempFlag := flag.Float64("temp", float64(openai.DefaultCompletionOptions.Temperature), "The temperature to use")
+	flag.Parse()
+
 	data, err := io.ReadAll(os.Stdin)
 	if err != nil {
 		panic(err)
@@ -27,7 +34,13 @@ func main() {
 		token = string(content)
 	}
 
-	text, err := openai.NewClient(http.DefaultClient, token).GetCompletion(string(data))
+	options := openai.CompletionOptions{
+		Model:       *modelFlag,
+		MaxTokens:   *tokenFlag,
+		Temperature: *tempFlag,
+	}
+
+	text, err := openai.NewClient(http.DefaultClient, token).GetCompletion(string(data), options)
 	if err != nil {
 		panic(err)
 	}
