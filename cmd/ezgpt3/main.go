@@ -5,6 +5,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/cambel/easy-gpt3/openai"
 )
@@ -31,7 +32,10 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		token = string(content)
+		token = strings.TrimSpace(string(content))
+		if token == "" {
+			panic("no token found")
+		}
 	}
 
 	options := openai.CompletionOptions{
