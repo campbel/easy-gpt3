@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"io"
 	"net/http"
 	"os"
@@ -49,5 +50,5 @@ func main() {
 		panic(err)
 	}
 
-	println(strings.TrimSpace(text))
+	fmt.Println(strings.TrimSpace(text))
 }
