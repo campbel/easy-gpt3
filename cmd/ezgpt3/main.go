@@ -49,5 +49,5 @@ func main() {
 		panic(err)
 	}
 
-	println(text)
+	println(strings.TrimSpace(text))
 }
